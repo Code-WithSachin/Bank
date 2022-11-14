@@ -49,8 +49,10 @@ public class GareebBank implements Bank{
 
 
     @Override
-    public void addMoney(int money) {
-        balance+=money;
+    public void addMoney(int money, int accountNo) {
+        Pair data = map.get(accountNo);
+        data.balance+=money;
+        map.put(accountNo, new Pair(data.name,data.balance));
         System.out.println(name+" Amount of "+money+" Rs has been added now your total balance is "+balance+" Rs");
     }
 
@@ -65,9 +67,11 @@ public class GareebBank implements Bank{
             return money;
     }
 
+
     @Override
-    public int checkBalance() {
-        return balance;
+    public int checkBalance(int accountNo) {
+        Pair data = map.get(accountNo);
+        return data.balance;
     }
 
     @Override
